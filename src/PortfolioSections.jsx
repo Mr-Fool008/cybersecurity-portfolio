@@ -167,7 +167,7 @@ const PROJECTS = [
       ],
       findings: "Demonstrated that adversary dwell time relied on record suppression; engineered detections to catch transaction tampering in near-real-time.",
     },
-    repoUrl: "https://github.com/Mr-Fool008/cybersecurity-portfolio",
+    repoUrl: "https://github.com/Mr-Fool008/lazarus-apt38-case-study",
   },
 ];
 
