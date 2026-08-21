@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-void: #0b0f14;
+  --color-panel: #121821;
+  --color-panel-raised: #182029;
+  --color-hairline: #24313d;
+  --color-signal: #00d9b5;
+  --color-ink: #e4eaef;
+  --color-muted: #7c8b99;
+  --color-subtle: #9fb0bd;
+}
+
+html,
+body {
+  background-color: var(--color-void);
+  color: var(--color-ink);
+}
+
+* {
+  scrollbar-color: var(--color-hairline) var(--color-void);
+}
+
+::selection {
+  background-color: var(--color-signal);
+  color: var(--color-void);
+}
