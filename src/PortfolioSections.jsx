@@ -144,11 +144,33 @@ const PROJECTS = [
         "Engineered features (frequency, entropy, timing) and trained a classification model in Python.",
         "Scored the model against held-out labeled IOC data and compared precision/recall to rule-based detection.",
       ],
-      findings:
-        "Model-based scoring surfaced a class of low-and-slow anomalies that static thresholds missed.",
+      findings: "Model-based scoring surfaced a class of low-and-slow anomalies that static thresholds missed.",
     },
   },
+  {
+    caseId: "TI-24-006",
+    tier: "Advanced",
+    tactic: "Threat Intelligence / C2",
+    icon: Radar,
+    title: "Lazarus Group / APT38 Threat Modeling & Detection",
+    bullets: [
+      "Modeled the 2016 Bangladesh Bank SWIFT heist into a STIX 1.x threat graph using Soltra Edge, mapping TTPs across all kill-chain phases.",
+      "Expanded intrusion stages to MITRE ATT&CK Enterprise techniques and authored 3 production-grade Sigma rules and Splunk SPL queries.",
+    ],
+    tags: ["STIX/TAXII", "MITRE ATT&CK", "Sigma", "Splunk SPL", "Threat Modeling"],
+    writeup: {
+      objective: "Model the multi-stage SWIFT bank heist in STIX, map techniques to ATT&CK, and engineer detection logic for log tampering and C2 beaconing.",
+      method: [
+        "Constructed a structured STIX package linking threat actors, malware behaviors (Banswift), and C2 observables.",
+        "Mapped kill-chain stages to MITRE ATT&CK IDs across Initial Access, Defense Evasion (T1565.001), and C2 (T1071.001).",
+        "Authored Sigma detection rules and Splunk SPL queries targeting database tampering and anomalous outbound beaconing.",
+      ],
+      findings: "Demonstrated that adversary dwell time relied on record suppression; engineered detections to catch transaction tampering in near-real-time.",
+    },
+    repoUrl: "https://github.com/Mr-Fool008/cybersecurity-portfolio",
+  },
 ];
+
 
 const SKILL_GROUPS = [
   {
@@ -253,13 +275,23 @@ function CaseModal({ project, onClose }) {
           </div>
 
           <div className="flex items-center gap-2 border-t border-[#24313D] pt-4">
-            <button
-              disabled
-              title="Write-up coming soon"
-              className="inline-flex cursor-not-allowed items-center gap-1.5 rounded-md bg-[#182029] px-3 py-1.5 font-mono text-xs text-[#5A6B78] ring-1 ring-[#24313D]"
-            >
-              <Github className="h-3.5 w-3.5" /> Repo coming soon
-            </button>
+            {project.repoUrl ? (
+              <a
+                href={project.repoUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 rounded-md bg-[#00D9B5]/10 px-3 py-1.5 font-mono text-xs text-[#00D9B5] ring-1 ring-[#00D9B5]/30 transition hover:bg-[#00D9B5]/20"
+              >
+                <Github className="h-3.5 w-3.5" /> View Case Study
+                </a>
+              ) : (
+                <button
+                  disabled
+                  className="inline-flex cursor-not-allowed items-center gap-1.5 rounded-md bg-[#182029] px-3 py-1.5 font-mono text-xs text-[#5A6B78] ring-1 ring-[#24313D]"
+                >
+                  <Github className="h-3.5 w-3.5" /> Repo coming soon
+                </button>
+            )}
           </div>
         </div>
       </div>
