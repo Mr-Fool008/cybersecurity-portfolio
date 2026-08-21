@@ -442,7 +442,7 @@ export function ExperienceSection() {
             <h3 className="font-mono text-sm font-semibold text-[#E4EAEF]">Student AV Technician</h3>
             <p className="text-xs text-[#7C8B99]">University of South Florida</p>
           </div>
-          <span className="font-mono text-xs text-[#7C8B99]">May 2025 – Present</span>
+          <span className="font-mono text-xs text-[#7C8B99]">May 2026 – Present</span>
         </div>
       </div>
     </section>
