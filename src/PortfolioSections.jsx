@@ -6,6 +6,7 @@ import {
   Radar,
   Crosshair,
   BrainCircuit,
+  Network,
   X,
   GraduationCap,
   Award,
@@ -169,6 +170,31 @@ const PROJECTS = [
     },
     repoUrl: "https://github.com/Mr-Fool008/lazaraus-apt38-case-study",
   },
+  {
+    caseId: "NIDS-24-007",
+    tier: "Advanced",
+    tactic: "Reconnaissance / Command and Control",
+    icon: Network,
+    title: "Network Security Analyzer & Algorithmic NIDS",
+    repoUrl: "https://github.com/Mr-Fool008/network-security-analyzer",
+    bullets: [
+      "Engineered a modular Python NIDS pairing Layer 3/4 packet parsing with purpose-fit data structures — hash sets, a sliding-window deque, and a bounded min-heap — to flag port scans, SYN floods, and rate-limit violations in O(1)-O(N log K) time.",
+      "Modeled host communication as a directed adjacency graph to surface lateral-movement and C2 fan-out patterns (star topologies) directly from captured traffic.",
+      "Built dual-mode ingestion (offline PCAP + live NIC sniffing via Scapy) with SIEM-ready JSON-Lines alerting and a full unittest suite covering every detection rule.",
+    ],
+    tags: ["Python", "Scapy", "NIDS", "Data Structures & Algorithms", "Graph Analysis", "SIEM Logging"],
+    writeup: {
+      objective:
+        "Build a from-scratch NIDS that pairs classic network detection (port scans, SYN floods, C2 beacon patterns) with the data structure best suited to each rule's access pattern.",
+      method: [
+        "Parsed raw packets at Layer 3/4 to extract IPs, ports, TCP flags, and timestamps for every capture.",
+        "Implemented per-rule state with a matching structure: hash sets for port cardinality, a deque-based sliding window for rate limiting, a bounded min-heap for top-K talkers, and an adjacency graph for lateral-movement fan-out.",
+        "Validated every rule against a synthetic PCAP generator producing both benign and attack traffic, backed by a full unittest suite.",
+      ],
+      findings:
+        "Most detection rules run in O(1) amortized time per packet, with top-K talker ranking bounded at O(N log K); alerts export to reports/alerts.json in a SIEM-ready JSON-Lines format alongside a CSV traffic summary.",
+    },
+  },
 ];
 
 
@@ -310,6 +336,7 @@ function ProjectCard({ project, onOpen }) {
         <div className="flex items-center gap-2">
           <Icon className="h-4 w-4 text-[#00D9B5]" strokeWidth={1.75} />
           <span className="font-mono text-xs text-[#7C8B99]">CASE {project.caseId}</span>
+          {project.repoUrl && <Github className="h-3.5 w-3.5 text-[#7C8B99]" strokeWidth={1.75} />}
         </div>
         <TierBadge tier={project.tier} />
       </div>
