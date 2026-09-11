@@ -195,14 +195,38 @@ const PROJECTS = [
         "Most detection rules run in O(1) amortized time per packet, with top-K talker ranking bounded at O(N log K); alerts export to reports/alerts.json in a SIEM-ready JSON-Lines format alongside a CSV traffic summary.",
     },
   },
+  {
+    caseId: "SIEM-26-008",
+    tier: "Advanced",
+    tactic: "Impact / Defense Evasion",
+    icon: Shield,
+    title: "Enterprise Wazuh SIEM & Real-Time File Integrity Monitoring",
+    repoUrl: "https://github.com/Mr-Fool008/wazuh-siem-fim-lab",
+    bullets: [
+      "Deployed an on-premise Wazuh SIEM/XDR manager and enrolled a Windows 11 endpoint for secure, centralized security telemetry collection.",
+      "Configured real-time Syscheck File Integrity Monitoring for a protected Windows directory and validated file creation, modification, and deletion detections.",
+      "Generated controlled PowerShell tampering events and correlated Wazuh Syscheck alerts with integrity metadata and cryptographic hash evidence.",
+    ],
+    tags: ["Wazuh", "SIEM / XDR", "File Integrity Monitoring", "PowerShell", "Windows Security", "Syscheck"],
+    writeup: {
+      objective:
+        "Build and validate a reproducible enterprise-style SIEM lab that detects endpoint file integrity violations in real time and preserves investigation-ready evidence.",
+      method: [
+        "Deployed Wazuh Manager on Ubuntu Server and enrolled a Windows 11 endpoint using agent credentials and secure TCP 1514 communication.",
+        "Configured Syscheck with real-time monitoring for C:\\wazuh-test and restarted the Wazuh agent to apply the FIM policy.",
+        "Simulated file creation, unauthorized modification, and deletion with PowerShell, then reviewed the resulting Syscheck events in the Wazuh dashboard.",
+      ],
+      findings:
+        "Confirmed end-to-end detection of file addition, integrity modification, and deletion events, with Wazuh rules surfacing actionable alerts and integrity evidence for incident-response analysis.",
+    },
+  },
 ];
-
 
 const SKILL_GROUPS = [
   {
     label: "Defensive & SOC",
     icon: Shield,
-    items: ["Elastic Stack (ELK)", "KQL", "Snort IDS", "Wireshark", "Volatility", "Windows Event Logs", "ETW / Kernel Telemetry"],
+    items: ["Wazuh SIEM/XDR", "File Integrity Monitoring (FIM)", "Elastic Stack (ELK)", "KQL", "Snort IDS", "Wireshark", "Volatility", "Windows Event Logs", "ETW / Kernel Telemetry"],
   },
   {
     label: "Offensive / Assessment",
@@ -309,14 +333,14 @@ function CaseModal({ project, onClose }) {
                 className="inline-flex items-center gap-1.5 rounded-md bg-[#00D9B5]/10 px-3 py-1.5 font-mono text-xs text-[#00D9B5] ring-1 ring-[#00D9B5]/30 transition hover:bg-[#00D9B5]/20"
               >
                 <Github className="h-3.5 w-3.5" /> View Case Study
-                </a>
-              ) : (
-                <button
-                  disabled
-                  className="inline-flex cursor-not-allowed items-center gap-1.5 rounded-md bg-[#182029] px-3 py-1.5 font-mono text-xs text-[#5A6B78] ring-1 ring-[#24313D]"
-                >
-                  <Github className="h-3.5 w-3.5" /> Repo coming soon
-                </button>
+              </a>
+            ) : (
+              <button
+                disabled
+                className="inline-flex cursor-not-allowed items-center gap-1.5 rounded-md bg-[#182029] px-3 py-1.5 font-mono text-xs text-[#5A6B78] ring-1 ring-[#24313D]"
+              >
+                <Github className="h-3.5 w-3.5" /> Repo coming soon
+              </button>
             )}
           </div>
         </div>
