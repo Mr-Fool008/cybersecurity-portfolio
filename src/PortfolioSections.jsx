@@ -89,13 +89,36 @@ const PROJECTS = [
       findings: "Confirmed end-to-end detection of file addition, integrity modification, and deletion events, with Wazuh rules surfacing actionable alerts and integrity evidence for incident-response analysis.",
     },
   },
+  {
+    caseId: "FW-26-009",
+    tier: "Applied",
+    tactic: "Network Defense / Traffic Control",
+    icon: Shield,
+    title: "pfSense Firewall Home Lab & SYN Traffic Mitigation",
+    repoUrl: "https://github.com/Mr-Fool008/pfsense-firewall-home-lab",
+    bullets: [
+      "Built a two-zone VirtualBox lab with Kali Linux on the WAN side, pfSense as the routing and policy boundary, and Ubuntu on an isolated internal LAN.",
+      "Configured DHCP, DNS, static routing, and firewall policy; captured controlled TCP SYN traffic in Wireshark and verified mitigation with before/after packet evidence.",
+      "Diagnosed a failed Unbound DNS Resolver by tracing client resolution, service state, and logs to an empty pfSense domain configuration.",
+    ],
+    tags: ["pfSense", "Firewalling", "Wireshark", "Routing", "DNS / Unbound", "VirtualBox"],
+    writeup: {
+      objective: "Build a segmented attacker-firewall-victim home lab and validate that pfSense can route, inspect, and block controlled test traffic before it reaches a protected Ubuntu host.",
+      method: [
+        "Configured pfSense with a bridged WAN interface and an isolated LabNet LAN, then enabled DHCP/DNS for the protected Ubuntu subnet.",
+        "Added a static route on WAN-side Kali through pfSense, generated a controlled 20-packet TCP SYN test, and captured the traffic on Ubuntu with Wireshark.",
+        "Placed a specific WAN block rule above broader allow rules and repeated the same test to validate rule counters and confirm that Ubuntu no longer observed the packets.",
+      ],
+      findings: "Verified end-to-end segmentation and policy enforcement: traffic reached Ubuntu before mitigation, matched the pfSense block rule after mitigation, and disappeared from the protected host's packet capture. Troubleshooting also isolated and fixed an Unbound DNS failure caused by an empty system domain field.",
+    },
+  },
 ];
 
 const SKILL_GROUPS = [
   {
     label: "Defensive & SOC",
     icon: Shield,
-    items: ["Wazuh SIEM/XDR", "File Integrity Monitoring (FIM)", "Elastic Stack (ELK)", "KQL", "Snort IDS", "Wireshark", "Volatility", "Windows Event Logs", "ETW / Kernel Telemetry"],
+    items: ["Wazuh SIEM/XDR", "pfSense / Firewall Administration", "File Integrity Monitoring (FIM)", "Elastic Stack (ELK)", "KQL", "Snort IDS", "Wireshark", "Volatility", "Windows Event Logs", "ETW / Kernel Telemetry"],
   },
   {
     label: "Offensive / Assessment",
